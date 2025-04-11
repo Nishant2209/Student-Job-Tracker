@@ -33,18 +33,14 @@ function App() {
       });
 
       if (response.ok) {
-        const data = await response.json();
         setIsAuthenticated(true);
-        setUserEmail(data.email);
         await fetchJobs();
       } else {
         setIsAuthenticated(false);
-        setUserEmail(undefined);
         setApplications([]);
       }
     } catch (error) {
       setIsAuthenticated(false);
-      setUserEmail(undefined);
       setApplications([]);
     }
   }, []);
@@ -225,6 +221,7 @@ function App() {
             mode={authMode}
             onModeChange={setAuthMode}
             setIsAuthenticated={setIsAuthenticated}
+            setUserEmail={setUserEmail}
           />
 
           <div className="flex justify-between items-center mb-6">

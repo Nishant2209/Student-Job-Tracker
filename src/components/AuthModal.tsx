@@ -11,6 +11,7 @@ interface AuthModalProps {
   mode: "login" | "register";
   onModeChange: (mode: "login" | "register") => void;
   setIsAuthenticated: (isAuthenticated: boolean) => void;
+  setUserEmail: (email: string) => void;
 }
 
 export function AuthModal({
@@ -19,6 +20,7 @@ export function AuthModal({
   mode,
   onModeChange,
   setIsAuthenticated,
+  setUserEmail,
 }: AuthModalProps) {
   const [formData, setFormData] = useState({
     email: "",
@@ -38,7 +40,6 @@ export function AuthModal({
       });
 
       const data = await response.json();
-
       if (!response.ok) {
         throw new Error(data.message);
       }
@@ -47,6 +48,7 @@ export function AuthModal({
       onClose();
       if (mode === "login") {
         setIsAuthenticated(true);
+        setUserEmail(data.data.user.email);
       }
       setFormData({ email: "", password: "" });
     } catch (error) {
