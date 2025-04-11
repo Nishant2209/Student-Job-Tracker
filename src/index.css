@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-bg: #0a0b0f;
+  --card-bg: #151619;
+  --input-bg: #1c1e24;
+  --accent-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --light-shadow: rgba(255, 255, 255, 0.05);
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--primary-bg);
+  color: #fff;
+}
+
+.neo-shadow {
+  background: var(--card-bg);
+  box-shadow: 8px 8px 15px var(--shadow-color),
+              -2px -2px 15px var(--light-shadow);
+}
+
+.neo-shadow-inner {
+  background: var(--card-bg);
+  box-shadow: inset 2px 2px 5px var(--shadow-color),
+              inset -2px -2px 5px var(--light-shadow);
+}
+
+.neo-button {
+  @apply px-6 py-2 rounded-lg transition-all duration-200;
+  background: var(--card-bg);
+  box-shadow: 4px 4px 8px var(--shadow-color),
+              -2px -2px 8px var(--light-shadow);
+}
+
+.neo-button:active {
+  @apply transform scale-95;
+  box-shadow: inset 2px 2px 5px var(--shadow-color),
+              inset -2px -2px 5px var(--light-shadow);
+}
+
+.neo-input {
+  @apply px-4 py-3 rounded-lg outline-none text-white w-full transition-all duration-200;
+  background: var(--input-bg);
+  border: 1px solid transparent;
+}
+
+.neo-input:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+.neo-input::placeholder {
+  color: #6b7280;
+}
+
+.neo-card {
+  @apply rounded-xl p-6;
+  background: var(--card-bg);
+  box-shadow: 8px 8px 15px var(--shadow-color),
+              -2px -2px 15px var(--light-shadow);
+}
+
+.gradient-text {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-border {
+  position: relative;
+  border-radius: 0.5rem;
+  background: var(--accent-gradient);
+  padding: 1px;
+}
+
+.gradient-border > * {
+  background: var(--card-bg);
+  border-radius: inherit;
+}
+
+/* Calendar Styles */
+.rdp {
+  --rdp-cell-size: 40px;
+  --rdp-accent-color: #6366f1;
+  --rdp-background-color: #1c1e24;
+  --rdp-accent-color-dark: #818cf8;
+  --rdp-background-color-dark: #151619;
+  --rdp-outline: 2px solid var(--rdp-accent-color);
+  --rdp-outline-selected: 2px solid var(--rdp-accent-color);
+  margin: 0;
+}
+
+.rdp-table {
+  width: 100%;
+}
+
+.rdp-cell {
+  text-align: center;
+}
+
+.rdp-button:hover:not([disabled]):not(.rdp-day_selected) {
+  background-color: grey;
+  width: 100%;
+}
+
+.rdp-day_selected,
+.rdp-day_selected:focus-visible,
+.rdp-day_selected:hover {
+  background-color: var(--rdp-accent-color);
+  color: white;
+  width: 100%;
+}
+
+.date-picker-wrapper {
+  @apply absolute z-30 mt-2 p-4 rounded-lg neo-shadow;
+  background: var(--card-bg);
+}
+
+/* Animations */
+@keyframes slideIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+.hover-scale {
+  @apply transition-transform duration-200 hover:scale-105;
+}
+
+.pulse {
+  @apply animate-pulse;
+}
+
+/* Date Input Styles */
+input[type="date"] {
+  @apply neo-input;
+  color-scheme: dark;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+/* Modal z-index adjustments */
+.modal-overlay {
+  z-index: 40;
+}
+
+.modal-content {
+  z-index: 50;
+}
+
+.date-picker-wrapper {
+  z-index: 30;
+}
